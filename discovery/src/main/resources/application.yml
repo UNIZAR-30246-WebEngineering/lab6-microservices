@@ -1,0 +1,32 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # Eureka Server doesn't register with itself.
+    # In a production setup with multiple Eureka servers (peer-to-peer),
+    # you'd set this to true so servers can discover each other.
+    register-with-eureka: false
+    # Eureka Server doesn't fetch registry from other servers.
+    # In a multi-server setup, this would be true to enable peer replication.
+    fetch-registry: false
+  server:
+    # How often Eureka checks for expired instances (in milliseconds).
+    # Default is 60 seconds. Setting to 1000ms (1 second) makes the demo more
+    # responsive - you'll see failed instances removed faster.
+    # In production, keep the default (60000ms) to avoid unnecessary overhead.
+    eviction-interval-timer-in-ms: 1000
+    # Renewal threshold for self-preservation mode.
+    # If less than 85% of instances renew their heartbeat, Eureka enters
+    # self-preservation mode and stops evicting instances (assumes network issue).
+    # This prevents accidental mass eviction during network partitions.
+    renewal-percent-threshold: 0.85
+
+logging:
+  level:
+    # Reduces Eureka's verbose logging for cleaner demo output.
+    # In production, you might want INFO level to monitor service registrations.
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF

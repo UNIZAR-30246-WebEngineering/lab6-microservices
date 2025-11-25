@@ -1,0 +1,37 @@
+spring:
+  application:
+    # This name is crucial! It's used for:
+    # 1. Service registration: Eureka registers this service as "ACCOUNTS-SERVICE"
+    # 2. Configuration lookup: Config Server looks for "accounts-service.yml"
+    # 3. Service discovery: Other services find this service by this name
+    name: accounts-service
+  cloud:
+    config:
+      # Direct URL to Config Server.
+      uri: http://localhost:8762
+  config:
+    # Imports configuration from the Config Server.
+    # WITHOUT "optional:" prefix = FAIL-FAST behavior (service fails if Config Server unreachable)
+    # WITH "optional:" prefix = service starts anyway using local config
+    # Note: spring.cloud.config.fail-fast is IGNORED when using spring.config.import
+    import: "configserver:"
+
+eureka:
+  client:
+    serviceUrl:
+      # Eureka Server location. This service will:
+      # 1. Register itself with Eureka at startup
+      # 2. Send heartbeats every 30 seconds (default)
+      # 3. Query Eureka to discover other services (like Config Server)
+      # If Eureka is unavailable, the service will still start but won't
+      # be discoverable by other services.
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # Exposes all Actuator endpoints for monitoring.
+        # In production, you'd typically expose only specific endpoints like
+        # "health,info,metrics" for security reasons.
+        include: "*" # Enable all endpoints by default
