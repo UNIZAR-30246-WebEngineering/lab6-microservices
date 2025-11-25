@@ -11,7 +11,7 @@ Describe the changes you made to the configuration:
 
 ---
 
-## 2. Service Registration (Task 2)
+## 2. Service Registration (Task 1)
 
 ### Accounts Service Registration
 
@@ -27,7 +27,7 @@ Explain how the web service discovers the accounts service.
 
 ---
 
-## 3. Eureka Dashboard (Task 3)
+## 3. Eureka Dashboard (Task 2)
 
 ![Eureka Dashboard](docs/screenshots/eureka-dashboard.png)
 
@@ -38,7 +38,7 @@ Describe what the Eureka dashboard shows:
 
 ---
 
-## 4. Multiple Instances (Task 5)
+## 4. Multiple Instances (Task 4)
 
 ![Multiple Instances](docs/screenshots/multiple-instances.png)
 
@@ -50,7 +50,7 @@ Answer the following questions:
 
 ---
 
-## 5. Service Failure Analysis (Task 6)
+## 5. Service Failure Analysis (Task 5)
 
 ### Initial Failure
 
@@ -69,7 +69,7 @@ Explain how Eureka detects and removes the failed instance:
 
 ---
 
-## 6. Service Recovery Analysis (Task 7)
+## 6. Service Recovery Analysis (Task 6)
 
 ![Recovery State](docs/screenshots/recovery.png)
 

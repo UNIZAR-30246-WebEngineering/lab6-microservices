@@ -163,7 +163,7 @@ Services register themselves with Eureka, and clients query Eureka to find servi
 The **Spring Cloud Config Server** provides centralized configuration.
 
 - **Port**: 8762
-- **Config Location**: `config/config/` directory (native file system)
+- **Config Location**: `config/config/` directory (native file system, served from `file:${user.dir}/config` as configured in `config/src/main/resources/application.yml`)
 - **Language**: Kotlin
 
 ```bash
@@ -376,7 +376,6 @@ Your submission will be evaluated on:
 - **Watch the Logs**: Log messages tell you exactly what's happening
 - **Use the Dashboard**: Eureka dashboard is your best debugging tool
 - **Take Screenshots Early**: Capture states before they change
-- **Understand Timeouts**: Eureka has heartbeat and eviction timeouts (30s default)
 - **Read Error Messages**: They usually explain what went wrong
 - **Commit Often**: Small, frequent commits help track your progress
 - **Ask Questions**: If stuck, use the references or ask your instructor
