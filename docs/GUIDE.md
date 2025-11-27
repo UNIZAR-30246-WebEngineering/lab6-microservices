@@ -11,6 +11,7 @@ format:
     code-overflow: wrap
     theme: cosmo
   pdf:
+    pdf-engine: xelatex
     documentclass: article
     classoption: [11pt, a4paper]
     toc: true
@@ -30,8 +31,15 @@ format:
       - bookmarksopen=true
     header-includes:
       - |
-        \usepackage{helvet}
+        \usepackage{fontspec}
+        \setsansfont{Helvetica Neue}[
+          Scale=1.0,
+          BoldFont = Helvetica Neue Bold,
+          ItalicFont = Helvetica Neue Italic,
+          BoldItalicFont = Helvetica Neue Bold Italic
+        ]
         \renewcommand{\familydefault}{\sfdefault}
+        \setmonofont{Menlo}[Scale=0.9]
         \usepackage{hyperref}
         \usepackage{fancyhdr}
         \pagestyle{fancy}
@@ -152,18 +160,43 @@ The **Eureka Server** provides service registration and discovery.
 - **Dashboard**: <http://localhost:8761>
 - **Language**: Kotlin
 
-**Mandatory for Windows users**: keep the following setting in `discovery/src/main/resources/application.yml`:
-
-- `eureka.server.enable-self-preservation: false`
-
-This setting make Eureka evict failed instances quickly so that the failure and recovery experiments behave as described in this guide.
-On Windows it is required for the lab to work reliably. On other operating systems it is not necessary.
-
 ```bash
 ./gradlew discovery:bootRun
 ```
 
 Services register themselves with Eureka, and clients query Eureka to find service instances. This enables dynamic scaling and failover without hardcoded URLs.
+
+:::{.callout-important}
+## **Mandatory for Windows users**
+
+If you are using Windows, choose one of the following options:
+
+A) **Do the laboratory on your own Windows machine.**
+
+   In `discovery/src/main/resources/application.yml`, ensure the following setting is present:
+
+   ```yaml
+   eureka.server.enable-self-preservation: false
+   ```
+
+   This makes Eureka evict failed instances quickly so that the failure and recovery experiments behave as described in this guide. On Windows this is required for the lab to work reliably in many cases, **but it is reported that it may still not work in all cases.**
+
+B) **Do the laboratory on a Linux machine in GitHub Codespaces.**
+
+   Fork the repository and create a Codespace from your fork. If you need to change the Java version, you can use the following command to list the available versions Java versions:
+
+   ```bash
+   sdk list java
+   ```
+
+   Then install the desired version (for example, Java Zulu 17) with:
+
+   ```bash
+   sdk install java 17.0.17-zulu
+   ```
+
+   When running the commands, remember to open the requested ports. If the Eureka server stops, you can restart it and any running services will automatically register again.
+:::
 
 ### Configuration Server (`config`)
 
